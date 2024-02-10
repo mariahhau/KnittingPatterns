@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnittingPatterns", "KnittingPatterns\KnittingPatterns.csproj", "{A749E0CE-C195-4D0B-B440-FE35FD618B68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A749E0CE-C195-4D0B-B440-FE35FD618B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A749E0CE-C195-4D0B-B440-FE35FD618B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A749E0CE-C195-4D0B-B440-FE35FD618B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A749E0CE-C195-4D0B-B440-FE35FD618B68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B91FF360-18CC-443D-89AD-62EF4E242F80}
+	EndGlobalSection
+EndGlobal
