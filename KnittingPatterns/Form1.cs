@@ -75,8 +75,8 @@ namespace KnittingPatterns
             canvasPanel.BackgroundImageLayout = ImageLayout.None;
             
 
-            gridX =  rowNumberPanel.Width;
-            gridY =  rowNumberPanel.Location.Y;
+            gridX =  rowNumberPanel.Width + 5;
+            gridY =  rowNumberPanel.Location.Y - 6;
 
             stitchCount = (int)stitches.Value;
             rowCount = (int)rows.Value;
@@ -243,7 +243,7 @@ namespace KnittingPatterns
                 }
 
             }
-
+            draw_stitches();
             canvasPanel.Invalidate();
         }
 
@@ -414,7 +414,7 @@ namespace KnittingPatterns
                 if (y < rows.Value)
                 {
                     brush2.Color = Color.Black;
-                    graph.DrawString(y + 1 + "", new Font("Arial", 10), brush2, gridX / 3, gridY + y * cellSize + cellSize / 3);
+                    graph.DrawString(y + 1 + "", new Font("Arial", 10), brush2, 0, gridY + y * cellSize + cellSize / 3);
                 }
                
                 graph.DrawLine(pen, gridX, gridY + y * cellSize, gridX + (int)stitches.Value * cellSize, gridY + y * cellSize);
