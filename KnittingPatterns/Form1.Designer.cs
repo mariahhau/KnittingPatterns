@@ -79,7 +79,6 @@
             // 
             this.topPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.topPanel.Controls.Add(this.change_color3);
-            this.topPanel.Controls.Add(this.colNumberPanel);
             this.topPanel.Controls.Add(this.change_background);
             this.topPanel.Controls.Add(this.change_color4);
             this.topPanel.Controls.Add(this.color3);
@@ -123,10 +122,10 @@
             // colNumberPanel
             // 
             this.colNumberPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.colNumberPanel.BackColor = System.Drawing.Color.Transparent;
-            this.colNumberPanel.Location = new System.Drawing.Point(12, 46);
+            this.colNumberPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.colNumberPanel.Location = new System.Drawing.Point(19, 47);
             this.colNumberPanel.Name = "colNumberPanel";
-            this.colNumberPanel.Size = new System.Drawing.Size(1177, 13);
+            this.colNumberPanel.Size = new System.Drawing.Size(1177, 15);
             this.colNumberPanel.TabIndex = 2;
             // 
             // change_background
@@ -411,11 +410,11 @@
             // 
             // rowNumberPanel
             // 
-            this.rowNumberPanel.BackColor = System.Drawing.Color.Transparent;
+            this.rowNumberPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rowNumberPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.rowNumberPanel.Location = new System.Drawing.Point(0, 47);
             this.rowNumberPanel.Name = "rowNumberPanel";
-            this.rowNumberPanel.Size = new System.Drawing.Size(13, 612);
+            this.rowNumberPanel.Size = new System.Drawing.Size(16, 612);
             this.rowNumberPanel.TabIndex = 0;
             // 
             // gridSizeDown
@@ -437,9 +436,9 @@
             this.canvas_parent.AutoScroll = true;
             this.canvas_parent.BackColor = System.Drawing.Color.RosyBrown;
             this.canvas_parent.Controls.Add(this.canvasPanel);
-            this.canvas_parent.Location = new System.Drawing.Point(12, 59);
+            this.canvas_parent.Location = new System.Drawing.Point(19, 65);
             this.canvas_parent.Name = "canvas_parent";
-            this.canvas_parent.Size = new System.Drawing.Size(1177, 600);
+            this.canvas_parent.Size = new System.Drawing.Size(1170, 594);
             this.canvas_parent.TabIndex = 3;
             // 
             // panel1
@@ -468,6 +467,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1189, 681);
+            this.Controls.Add(this.colNumberPanel);
             this.Controls.Add(this.canvas_parent);
             this.Controls.Add(this.rowNumberPanel);
             this.Controls.Add(this.panel1);

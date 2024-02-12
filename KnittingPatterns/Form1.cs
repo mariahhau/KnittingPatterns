@@ -22,8 +22,13 @@ namespace KnittingPatterns
         public Graphics graph;
 
         public Graphics rowG;
+        public Graphics rowGraph;
+        Bitmap rowSurface;
+
         public Graphics colG;
-       
+        public Graphics colGraph;
+        Bitmap colSurface;
+
         public SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
         public SolidBrush brush2 = new System.Drawing.SolidBrush(System.Drawing.Color.Gray);
         public Pen pen = new Pen(System.Drawing.Color.Gray);
@@ -68,15 +73,31 @@ namespace KnittingPatterns
             yarnBall_color.BackgroundImage = ballSurface;
             yarnGraph = Graphics.FromImage(ballSurface);
 
+            rowG = rowNumberPanel.CreateGraphics();
+            rowSurface = new Bitmap(rowNumberPanel.Width, rowNumberPanel.Height);
+            rowGraph = Graphics.FromImage(rowSurface);
+            rowNumberPanel.BackgroundImage = rowSurface;
+            //rowG.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+            rowGraph.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+            colG = colNumberPanel.CreateGraphics();
+            colSurface = new Bitmap(colNumberPanel.Width, colNumberPanel.Height);
+            colGraph = Graphics.FromImage(colSurface);
+            colNumberPanel.BackgroundImage = colSurface;
+            //colG.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+            colGraph.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+
+
 
             surface = new Bitmap(canvasPanel.Width, canvasPanel.Height);
             graph = Graphics.FromImage(surface);
 
             canvasPanel.BackgroundImageLayout = ImageLayout.None;
-            
 
-            gridX =  rowNumberPanel.Width + 5;
-            gridY =  rowNumberPanel.Location.Y - 6;
+
+            gridX = 0; // rowNumberPanel.Width + 5;
+            gridY = colNumberPanel.Height;
 
             stitchCount = (int)stitches.Value;
             rowCount = (int)rows.Value;
@@ -280,7 +301,7 @@ namespace KnittingPatterns
                     }
                 }
 
-                    Region region = new Region(new Rectangle(stitchCount * cellSize + gridX, 0, this.Size.Width, this.Size.Height));
+                    Region region = new Region(new Rectangle(stitchCount * cellSize , 0, this.Size.Width, this.Size.Height));
                    
                     if (stitches.Value * cellSize + gridX > this.Size.Width)
                     {
@@ -288,6 +309,7 @@ namespace KnittingPatterns
                         canvasPanel.Width = (int)stitches.Value * cellSize + gridX;
                     }
                     canvasPanel.Invalidate(region, false);
+                    colNumberPanel.Invalidate(region, false);
 
 
 
@@ -309,13 +331,16 @@ namespace KnittingPatterns
                     }                   
                 }
                 
-                Region region = new Region(new Rectangle((int)stitches.Value * cellSize + gridX + (int)pen.Width, 0, this.Size.Width, this.Size.Height));
-                
+                Region region = new Region(new Rectangle((int)stitches.Value * cellSize + (int)pen.Width, 0, this.Size.Width, this.Size.Height));
+                colNumberPanel.Invalidate(region, false);
                 canvasPanel.Invalidate(region, false);
-                brush.Color = canvasPanel.BackColor; 
-                g.FillRegion(brush, region);
-                graph.FillRegion(brush, region);
-               
+
+                brush2.Color = canvasPanel.BackColor; 
+                g.FillRegion(brush2, region);
+                graph.FillRegion(brush2, region);
+                colG.FillRegion(brush2, region);
+                colGraph.FillRegion(brush2, region);
+
 
 
 
@@ -341,10 +366,12 @@ namespace KnittingPatterns
                 }
 
                
-                Region region = new Region(new Rectangle(0,rowCount * cellSize + gridY, this.Size.Width, this.Size.Height));
-                canvasPanel.Invalidate(region, true);
+                Region region = new Region(new Rectangle(0,rowCount * cellSize, this.Size.Width, this.Size.Height));
 
+                canvasPanel.Invalidate(region, false);
+                rowNumberPanel.Invalidate(region, false);
                
+
                 draw_rows();
                 draw_columns(0, (rowCount - 1) * cellSize);
                 draw_stitches();
@@ -367,12 +394,17 @@ namespace KnittingPatterns
 
 
                 }
-                Region region = new Region(new Rectangle(0, (int)rows.Value * cellSize + gridY + (int)pen.Width, this.Size.Width, this.Size.Height));
+                Region region = new Region(new Rectangle(0, (int)rows.Value * cellSize + (int)pen.Width, this.Size.Width, this.Size.Height));
+                Region rowRegion = new Region(new Rectangle(0, (int)rows.Value * cellSize + gridY + (int)pen.Width, this.Size.Width, this.Size.Height));
                 canvasPanel.Invalidate(region, false);
+                rowNumberPanel.Invalidate(rowRegion, false);
+                Console.WriteLine(gridY + " AAAAAAAAAAAAaa" + ((int)rows.Value * cellSize + gridY + (int)pen.Width));
                 
-                brush.Color = canvasPanel.BackColor;
-                g.FillRegion(brush, region);
-                graph.FillRegion(brush, region);
+                brush2.Color = canvasPanel.BackColor;
+                g.FillRegion(brush2, region);
+                graph.FillRegion(brush2, region);
+                rowG.FillRegion(brush2, rowRegion);
+                rowGraph.FillRegion(brush2, rowRegion);
 
 
 
@@ -390,10 +422,10 @@ namespace KnittingPatterns
             {
                 if (x < stitches.Value && y == 0)
                 {
-                    graph.DrawString(x + 1 + "", new Font("Arial", 10, FontStyle.Regular), brush2, gridX + x * cellSize + cellSize / 3, gridY / 3);
+                    colGraph.DrawString(x + 1 + "", new Font("Arial", 9, FontStyle.Regular), brush2, 1 + x * cellSize + cellSize / 3, 1);
                 }
                 
-                 graph.DrawLine(pen, gridX + x * cellSize, gridY + y, gridX + x * cellSize, gridY + (int)rows.Value * cellSize);
+                 graph.DrawLine(pen,  x * cellSize,  y,  x * cellSize, (int)rows.Value * cellSize);
                 
             }
             
@@ -414,10 +446,10 @@ namespace KnittingPatterns
                 if (y < rows.Value)
                 {
                     brush2.Color = Color.Black;
-                    graph.DrawString(y + 1 + "", new Font("Arial", 10), brush2, 0, gridY + y * cellSize + cellSize / 3);
+                    rowGraph.DrawString(y + 1 + "", new Font("Arial", 9), brush2, 0, y * cellSize + 3*cellSize/4); 
                 }
                
-                graph.DrawLine(pen, gridX, gridY + y * cellSize, gridX + (int)stitches.Value * cellSize, gridY + y * cellSize);
+                graph.DrawLine(pen, 0,  y * cellSize,  (int)stitches.Value * cellSize, y * cellSize);
 
             }
 
@@ -430,6 +462,9 @@ namespace KnittingPatterns
             rowCount = (int)rows.Value;
             canvasPanel.BackgroundImage = surface;
             yarnBall_color.BackgroundImage = ballSurface;
+            rowNumberPanel.BackgroundImage = rowSurface;
+            colNumberPanel.BackgroundImage = colSurface;
+        
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -506,12 +541,12 @@ namespace KnittingPatterns
                     if ((stitchList[i][j]) != 0)
                     {
                         brush2.Color = Color.FromArgb(stitchList[i][j]);
-                        graph.FillRectangle(brush2, gridX + j * cellSize + pen.Width, gridY + i * cellSize + pen.Width, cellSize-pen.Width, cellSize-pen.Width);
+                        //graph.FillRectangle(brush2, gridX + j * cellSize + pen.Width, gridY + i * cellSize + pen.Width, cellSize-pen.Width, cellSize-pen.Width);
                         
                     } else
                     {
                         brush2.Color = background_color.BackColor;
-                        graph.FillRectangle(brush2, gridX + j * cellSize + pen.Width, gridY + i * cellSize + pen.Width, cellSize - pen.Width, cellSize - pen.Width);
+                        //graph.FillRectangle(brush2, gridX + j * cellSize + pen.Width, gridY + i * cellSize + pen.Width, cellSize - pen.Width, cellSize - pen.Width);
                     }
                 }
             }
