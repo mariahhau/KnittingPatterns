@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.topPanel = new System.Windows.Forms.Panel();
             this.change_color3 = new System.Windows.Forms.Button();
-            this.colNumberPanel = new System.Windows.Forms.Panel();
             this.change_background = new System.Windows.Forms.Button();
             this.change_color4 = new System.Windows.Forms.Button();
             this.color3 = new System.Windows.Forms.PictureBox();
@@ -54,10 +53,12 @@
             this.save_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.colNumberPanel = new System.Windows.Forms.Panel();
             this.canvasPanel = new System.Windows.Forms.Panel();
             this.rowNumberPanel = new System.Windows.Forms.Panel();
             this.gridSizeDown = new System.Windows.Forms.Button();
             this.canvas_parent = new System.Windows.Forms.Panel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.topPanel.SuspendLayout();
@@ -72,6 +73,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.color1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvas_parent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +84,6 @@
             // 
             this.topPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.topPanel.Controls.Add(this.change_color3);
-            this.topPanel.Controls.Add(this.colNumberPanel);
             this.topPanel.Controls.Add(this.change_background);
             this.topPanel.Controls.Add(this.change_color4);
             this.topPanel.Controls.Add(this.color3);
@@ -119,15 +123,6 @@
             this.change_color3.Text = "button2";
             this.change_color3.UseVisualStyleBackColor = true;
             this.change_color3.Click += new System.EventHandler(this.change_color3_Click);
-            // 
-            // colNumberPanel
-            // 
-            this.colNumberPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.colNumberPanel.BackColor = System.Drawing.Color.Transparent;
-            this.colNumberPanel.Location = new System.Drawing.Point(12, 46);
-            this.colNumberPanel.Name = "colNumberPanel";
-            this.colNumberPanel.Size = new System.Drawing.Size(1177, 13);
-            this.colNumberPanel.TabIndex = 2;
             // 
             // change_background
             // 
@@ -394,6 +389,15 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // colNumberPanel
+            // 
+            this.colNumberPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.colNumberPanel.BackColor = System.Drawing.Color.Linen;
+            this.colNumberPanel.Location = new System.Drawing.Point(29, 46);
+            this.colNumberPanel.Name = "colNumberPanel";
+            this.colNumberPanel.Size = new System.Drawing.Size(1160, 16);
+            this.colNumberPanel.TabIndex = 2;
+            // 
             // canvasPanel
             // 
             this.canvasPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -402,7 +406,7 @@
             this.canvasPanel.Location = new System.Drawing.Point(0, 0);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(0);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(1177, 600);
+            this.canvasPanel.Size = new System.Drawing.Size(1160, 597);
             this.canvasPanel.TabIndex = 1;
             this.canvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.updateValues);
             this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
@@ -411,12 +415,12 @@
             // 
             // rowNumberPanel
             // 
-            this.rowNumberPanel.BackColor = System.Drawing.Color.Transparent;
-            this.rowNumberPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rowNumberPanel.Location = new System.Drawing.Point(0, 47);
+            this.rowNumberPanel.BackColor = System.Drawing.Color.Linen;
+            this.rowNumberPanel.Location = new System.Drawing.Point(0, 0);
             this.rowNumberPanel.Name = "rowNumberPanel";
-            this.rowNumberPanel.Size = new System.Drawing.Size(13, 612);
+            this.rowNumberPanel.Size = new System.Drawing.Size(26, 597);
             this.rowNumberPanel.TabIndex = 0;
+            this.rowNumberPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.rowNumberPanel_Paint);
             // 
             // gridSizeDown
             // 
@@ -436,11 +440,31 @@
             this.canvas_parent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.canvas_parent.AutoScroll = true;
             this.canvas_parent.BackColor = System.Drawing.Color.RosyBrown;
-            this.canvas_parent.Controls.Add(this.canvasPanel);
-            this.canvas_parent.Location = new System.Drawing.Point(12, 59);
+            this.canvas_parent.Controls.Add(this.splitContainer1);
+            this.canvas_parent.Location = new System.Drawing.Point(0, 62);
             this.canvas_parent.Name = "canvas_parent";
-            this.canvas_parent.Size = new System.Drawing.Size(1177, 600);
+            this.canvas_parent.Size = new System.Drawing.Size(1189, 597);
             this.canvas_parent.TabIndex = 3;
+            this.canvas_parent.Scroll += new System.Windows.Forms.ScrollEventHandler(this.canvas_parent_Scroll);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.rowNumberPanel);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.Controls.Add(this.canvasPanel);
+            this.splitContainer1.Panel2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.splitContainer1_Panel2_Scroll);
+            this.splitContainer1.Size = new System.Drawing.Size(1189, 597);
+            this.splitContainer1.SplitterDistance = 25;
+            this.splitContainer1.TabIndex = 2;
             // 
             // panel1
             // 
@@ -468,10 +492,10 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1189, 681);
-            this.Controls.Add(this.canvas_parent);
-            this.Controls.Add(this.rowNumberPanel);
+            this.Controls.Add(this.colNumberPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.topPanel);
+            this.Controls.Add(this.canvas_parent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -491,6 +515,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.color1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.canvas_parent.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -529,6 +557,7 @@
         private System.Windows.Forms.Button change_color3;
         private System.Windows.Forms.PictureBox color3;
         private System.Windows.Forms.PictureBox color4;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 
