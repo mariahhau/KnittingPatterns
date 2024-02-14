@@ -130,6 +130,7 @@ namespace KnittingPatterns
         private void canvasPanel_MouseWheel(object sender, MouseEventArgs e)
         {
             rowNumberPanel.Location = new Point(rowNumberPanel.Location.X, canvasPanel.Location.Y);
+            g = canvasPanel.CreateGraphics();
 
         }
 
@@ -186,11 +187,11 @@ namespace KnittingPatterns
                     previousCell = ((int)row, (int)col);
                     
                     if (row >= 0 && row < (double)rows.Value)
-                        {
+                    {
                             if (col >= 0 && col < (double)stitches.Value)
-                                { 
+                            { 
                                     if (stitchList[(int)row][(int)col] != brush.Color.ToArgb())
-                                        {
+                                    {
                                             if (brush.Color.ToArgb() == background_color.BackColor.ToArgb())
                                             {
                                                 stitchList[(int)row][(int)col] = 0;
@@ -200,10 +201,10 @@ namespace KnittingPatterns
                                             g.FillRectangle(brush, (float)x + pen.Width, (float)y  + pen.Width, cellSize - pen.Width, cellSize - pen.Width );
 
 
-                            }
+                                    }
 
-                        }
-                                }
+                            }
+                    }
                 } 
 
 
@@ -725,16 +726,19 @@ namespace KnittingPatterns
             
             if (e.ScrollOrientation == 0)
             {
-                colNumberPanel.Location = new Point(colNumberPanel.Location.X + diff, colNumberPanel.Location.Y);
-                               
-                g = canvasPanel.CreateGraphics();
+                colNumberPanel.Location = new Point(colNumberPanel.Location.X + diff, colNumberPanel.Location.Y);    
+              
             } else
             {
+                
                 rowNumberPanel.Location = new Point(rowNumberPanel.Location.X, (rowNumberPanel.Location.Y + diff));
             }
+            g = canvasPanel.CreateGraphics();
+            
 
-                       
-           
+
+
+
         }
 
         
