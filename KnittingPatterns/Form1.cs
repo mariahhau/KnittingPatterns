@@ -142,12 +142,13 @@ namespace KnittingPatterns
 
             currentCell = ((int)row, (int)col);
             previousCell = ((int)row, (int)col);
+           
 
             if (row >= 0 && row < (double)rows.Value)
             {
                 if (col >= 0 && col < (double)stitches.Value)
                 {
-                    g.FillRectangle(brush, (int)col * cellSize + gridX + pen.Width, (int)row * cellSize + pen.Width, cellSize - pen.Width, cellSize - pen.Width);
+                    g.FillRectangle(brush, (int)col * cellSize + pen.Width, (int)row * cellSize + pen.Width, cellSize - pen.Width, cellSize - pen.Width);
                     
                     if (brush.Color.ToArgb() == background_color.BackColor.ToArgb())
                     {
@@ -156,7 +157,10 @@ namespace KnittingPatterns
                      else stitchList[(int)row][(int)col] = brush.Color.ToArgb();
                    
                     graph.FillRectangle(brush, (int)col * cellSize + pen.Width, (int)row * cellSize + pen.Width, cellSize - pen.Width, cellSize - pen.Width);
+                    
+                   
                 }
+
             }
             
 
@@ -194,6 +198,7 @@ namespace KnittingPatterns
                                             else stitchList[(int)row][(int)col] = brush.Color.ToArgb();
                                             
                                             g.FillRectangle(brush, (float)x + pen.Width, (float)y  + pen.Width, cellSize - pen.Width, cellSize - pen.Width );
+
 
                             }
 
@@ -308,6 +313,7 @@ namespace KnittingPatterns
                         
                         canvasPanel.Width = (int)stitches.Value * cellSize + gridX;
                         colNumberPanel.Width = canvasPanel.Width;
+                        
 
                     }
                     canvasPanel.Invalidate(region, false);
@@ -537,6 +543,15 @@ namespace KnittingPatterns
                 {
 
                     canvasPanel.Width = (int)stitches.Value * cellSize + gridX;
+                    colNumberPanel.Width = canvasPanel.Width;
+                }
+
+                if (rows.Value * cellSize + gridY > canvasPanel.Height)
+                {
+
+
+                    canvasPanel.Height = (int)rows.Value * cellSize + gridY;
+                    rowNumberPanel.Height = canvasPanel.Height;
                 }
 
                 cellSize += 2;
@@ -711,11 +726,14 @@ namespace KnittingPatterns
             if (e.ScrollOrientation == 0)
             {
                 colNumberPanel.Location = new Point(colNumberPanel.Location.X + diff, colNumberPanel.Location.Y);
+                               
+                g = canvasPanel.CreateGraphics();
             } else
             {
                 rowNumberPanel.Location = new Point(rowNumberPanel.Location.X, (rowNumberPanel.Location.Y + diff));
             }
-            
+
+                       
            
         }
 

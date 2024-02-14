@@ -392,7 +392,7 @@
             // colNumberPanel
             // 
             this.colNumberPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.colNumberPanel.BackColor = System.Drawing.Color.Linen;
+            this.colNumberPanel.BackColor = System.Drawing.Color.Transparent;
             this.colNumberPanel.Location = new System.Drawing.Point(29, 46);
             this.colNumberPanel.Name = "colNumberPanel";
             this.colNumberPanel.Size = new System.Drawing.Size(1160, 16);
@@ -415,7 +415,7 @@
             // 
             // rowNumberPanel
             // 
-            this.rowNumberPanel.BackColor = System.Drawing.Color.Linen;
+            this.rowNumberPanel.BackColor = System.Drawing.Color.Transparent;
             this.rowNumberPanel.Location = new System.Drawing.Point(0, 0);
             this.rowNumberPanel.Name = "rowNumberPanel";
             this.rowNumberPanel.Size = new System.Drawing.Size(26, 597);
@@ -439,7 +439,7 @@
             // 
             this.canvas_parent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.canvas_parent.AutoScroll = true;
-            this.canvas_parent.BackColor = System.Drawing.Color.RosyBrown;
+            this.canvas_parent.BackColor = System.Drawing.Color.Transparent;
             this.canvas_parent.Controls.Add(this.splitContainer1);
             this.canvas_parent.Location = new System.Drawing.Point(0, 62);
             this.canvas_parent.Name = "canvas_parent";
