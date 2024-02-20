@@ -308,7 +308,7 @@ namespace KnittingPatterns
                     }
                 }
 
-                    Region region = new Region(new Rectangle(stitchCount * cellSize , 0, this.Size.Width, this.Size.Height));
+                    Region region = new Region(new Rectangle(stitchCount * cellSize , 0, canvasPanel.Width, canvasPanel.Height));
                    
                     if (stitches.Value * cellSize + gridX > canvasPanel.Width)
                     {
@@ -376,7 +376,7 @@ namespace KnittingPatterns
                 }
 
                
-                Region region = new Region(new Rectangle(0,rowCount * cellSize, this.Size.Width, this.Size.Height));
+                Region region = new Region(new Rectangle(0,rowCount * cellSize, canvasPanel.Width, canvasPanel.Height));
                 if (rows.Value * cellSize + gridY > canvasPanel.Height)
                 {
                    
@@ -391,6 +391,8 @@ namespace KnittingPatterns
                 
                
 
+               
+               
                 draw_rows();
                 draw_columns(0, (rowCount - 1) * cellSize);
                 draw_stitches();
@@ -414,7 +416,7 @@ namespace KnittingPatterns
 
                 }
                 Region region = new Region(new Rectangle(0, (int)rows.Value * cellSize + (int)pen.Width, canvasPanel.Width, canvasPanel.Height));
-                Region rowRegion = new Region(new Rectangle(0, (int)rows.Value * cellSize + gridY + (int)pen.Width, this.Size.Width, this.Size.Height));
+                Region rowRegion = new Region(new Rectangle(0, (int)rows.Value * cellSize + gridY + (int)pen.Width, canvasPanel.Width, canvasPanel.Height));
                 canvasPanel.Invalidate(region, false);
                 rowNumberPanel.Invalidate(rowRegion, false);
                 
@@ -448,7 +450,7 @@ namespace KnittingPatterns
                  graph.DrawLine(pen,  x * cellSize,  y,  x * cellSize, (int)rows.Value * cellSize);
                  
             }
-           // stitchCount = (int)stitches.Value; //!
+            
 
         }
         
@@ -462,7 +464,7 @@ namespace KnittingPatterns
             if (rowCount > rows.Value) { 
                 y = (int)rows.Value;
             }
-            Console.WriteLine("rowcount, rows.Value, y" + rowCount + " " + rows.Value + " " + y);
+            
             for (; y <= rows.Value; ++y)
             {
                 
@@ -476,20 +478,20 @@ namespace KnittingPatterns
                 }
                
                 graph.DrawLine(pen, 0,  y * cellSize,  (int)stitches.Value * cellSize , y * cellSize);
-                Console.WriteLine(y + " row");
+               
                 
             }
-            //rowCount = (int)rows.Value; //!
+            
 
         }
 
         
-        private void updateValues(object sender, PaintEventArgs e)
+        private void drawCanvas(object sender, PaintEventArgs e)
         {
-            Console.WriteLine("UPDATE VALUES");
-            stitchCount = (int)stitches.Value;
-            rowCount = (int)rows.Value;
             
+            rowCount = (int)rows.Value;
+            stitchCount = (int)stitches.Value;
+
             canvasPanel.BackgroundImage = surface;
             yarnBall_color.BackgroundImage = ballSurface;
             rowNumberPanel.BackgroundImage = rowSurface;
@@ -551,12 +553,14 @@ namespace KnittingPatterns
            
             if (cellSize < 60)
             {
+                cellSize += 2;
                 if (stitches.Value * cellSize + gridX > canvasPanel.Width)
                 {
 
                     canvasPanel.Width = (int)stitches.Value * cellSize + gridX;
                     colNumberPanel.Width = canvasPanel.Width;
                 }
+               
 
                 if (rows.Value * cellSize + gridY > canvasPanel.Height)
                 {
@@ -566,7 +570,7 @@ namespace KnittingPatterns
                     rowNumberPanel.Height = canvasPanel.Height;
                 }
 
-                cellSize += 2;
+               
                 graph.Clear(canvasPanel.BackColor);
                 rowGraph.Clear(rowNumberPanel.BackColor);
                 colGraph.Clear(colNumberPanel.BackColor);
@@ -586,8 +590,7 @@ namespace KnittingPatterns
 
         private void draw_stitches()
         {
-            Console.WriteLine("DRAW STITCHES");
-
+           
             for (int i = 0; i < rows.Value; i++) 
             {
                 for (int j = 0; j < stitches.Value; j++) 
@@ -751,12 +754,7 @@ namespace KnittingPatterns
             }
             g = canvasPanel.CreateGraphics();
 
-           // rowCount = (int)rows.Value;
-            //stitchCount = (int)stitches.Value;
-            
-
-
-
+          
 
         }
 
