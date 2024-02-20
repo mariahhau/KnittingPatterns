@@ -459,7 +459,7 @@ namespace KnittingPatterns
         {
             pen.Color = Color.Gray; 
             
-            int y = rowCount == (int)rows.Value ? 0 : rowCount;
+            int y = rowCount <= (int)rows.Value ? 0 : rowCount;
             
             if (rowCount > rows.Value) { 
                 y = (int)rows.Value;
