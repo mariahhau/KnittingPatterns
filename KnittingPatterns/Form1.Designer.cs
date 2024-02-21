@@ -393,7 +393,7 @@
             // 
             this.colNumberPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.colNumberPanel.BackColor = System.Drawing.Color.Transparent;
-            this.colNumberPanel.Location = new System.Drawing.Point(29, 46);
+            this.colNumberPanel.Location = new System.Drawing.Point(26, 46);
             this.colNumberPanel.Name = "colNumberPanel";
             this.colNumberPanel.Size = new System.Drawing.Size(1160, 16);
             this.colNumberPanel.TabIndex = 2;
@@ -408,7 +408,7 @@
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.Size = new System.Drawing.Size(1160, 597);
             this.canvasPanel.TabIndex = 1;
-            this.canvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.updateValues);
+            this.canvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawCanvas);
             this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel_MouseUp);
